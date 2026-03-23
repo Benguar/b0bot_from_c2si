@@ -54,7 +54,17 @@ def getNews_raw_route():
     news = g.news_controller.getNews()
     return render_template("news.html", data=news, llm_name="raw")
 
+"""
+return news without considering keywords
+"""
+@routes.route("/<llm_name>/news", methods=["GET"])
+def getNews_route(llm_name):
+    g.news_controller = NewsController(llm_name)
+    news = g.news_controller.getNews()
+    return render_template("news.html", data=news)
 
+
+"""
 """
 return news based on certain keywords (NO LLM)
 """
